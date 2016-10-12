@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>电子阅读器</title>
+	</head>
+	<script src="js/jquery-1.9.0.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+	
+	ul,li,body{padding: 0;margin: 0;}
+		#readArea{height:750px;border-radius:8px;width:550px;-font-size: 16px;
+		overflow:auto;border:9px solid sienna;margin:20px auto ;}
+		.changeSize{margin:10px auto;margin-left:35%;}
+		.pages{
+			width: 1000px;
+			height: 300px;
+		}
+		.pages input{
+			margin: 20px 80px;
+		}
+	</style>
+	<body>
+		<div id="readArea" style="font-size: 16px;">
+	
+			<section>
+				<h3>斗破苍穹</h3>
+				<div class="book-box">
+			
+		    </div><!--book-box-->
+			</section>
+			
+		</div>
+		<div class="changeSize">
+				<input type="button" name="A"  value="A+" onclick="changBig()" />
+				<input type="button" name="A"  value="A-" onclick="changSmall()" />
+				字体颜色<input class="wordColor" type="color"   value=" " onchange="changColor()"  />
+				背景颜色<input type="color" class="bgColor" name=" "value=" " onchange="changBgColor()" />
+				
+				<br />
+		<input type="button" name="jianjie" id="jianjie" value="简介" />
+		<div class="pages">
+		<input type="button" name="" id="a0" value="一   陨落的天才" />
+		<input type="button" name="" id="a1" value="二 斗气大陆" />
+		<input type="button" name="san" id="a2" value="三   客人" />
+		<input type="button" name="" id="3" value="四            云岚宗" />
+		<input type="button" name="" id="4" value="五    聚气散" />
+		<input type="button" name="san" id="liu" value="六   炼药师" />
+		<input type="button" name="" id="qi" value="七" />
+		<input type="button" name="" id="ba" value="八" />
+		<input type="button" name="san" id="jiu" value="九" />
+		<input type="button" name="" id="shi" value="十" />
+		<input type="button" name="" id="shi_yi" value="十一" />
+		<input type="button" name="san" id="shi_er" value="十二" />
+		</div>	<!--pages-->	
+		
+		</div>
+			<script type="text/javascript">
+			
+			$(function(){
+				var jianjie = $("#jianjie");
+		var box = $(".book-box");
+		var yi = $("#yi");
+		var er = $("#er");
+	$.get("json/book.json",function (data) {
+		
+		for (var i = 0; i < 5; i++) {
+			$().click(function() {
+			box.html(data[i].book);
+	});
+		}
+//		
+//		
+//		jianjie.click(function() {
+//			box.html(data[0].book);
+//	});
+//		yi.click(function() {
+//			box.html(data[1].book);
+//	});
+//		er.click(function() {
+//			box.html(data[2].book);
+//		});	
+		
+	
+	
+	
+	
+});	
+	
+});//end
+			
+			
+				var Plus = 16; //字体初始值
+				var Size = localStorage.getItem("wordZize"); //获取已存储的字体值
+				var prev = $("#prev");
+				var next = $("#next");
+				if(Size){
+					Plus = Size;  //如果存储的字体值大小存在，赋值给初始值
+				}
+				$("#readArea").css("font-size",Plus+"px");	//字体大小设置为Plus;
+				function changBig(){     //点击变大字体事件
+					Plus++;
+					$("#readArea").css("font-size",Plus+"px")
+					localStorage.setItem("wordZize",Plus);  //字体值变化后存入本地
+				}
+				function changSmall(){
+					Plus--;
+					$("#readArea").css("font-size",Plus+"px");
+					localStorage.setItem("wordZize",Plus);
+				}
+				
+				var wColor = localStorage.getItem("wordColor")   //获取存入本地的字体颜色值
+				$(".wordColor").val(wColor)  //将获取本地的字体颜色值赋值给变字体颜色按钮
+				$("section").css("color",wColor); // 用获取本地的字体颜色值改变文本字体颜色
+				function changColor(){
+					var WordColor = $(".wordColor").val();
+					localStorage.setItem("wordColor",WordColor);
+					$("section").css("color",WordColor);
+				}	
+				var BackgroundColor = localStorage.getItem("bgColor")
+				$(".bgColor").val(BackgroundColor);
+				$("#readArea").css("background-color",BackgroundColor)
+					function changBgColor(){
+					var bgColor = $(".bgColor").val();
+					$("#readArea").css("background-color",bgColor);
+					localStorage.setItem("bgColor",bgColor);
+				}
+					
+					prev.on("click",function () {
+						
+					})
+				
+			</script>
+	</body>
+</html>

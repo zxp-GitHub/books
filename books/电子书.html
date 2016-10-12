@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.9.0.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			.book-box{
+				width: 200px;
+				height: 500px;
+				background-color: pink;
+				color: skyblue;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="book-box">
+			
+		    </div><!--book-box-->
+		 <input type="button" name="jianjie" id="jianjie" value="简介" />
+		<input type="button" name="" id="yi" value="一.陨落的天才" />
+		<input type="button" name="" id="er" value="二" />
+		<input type="button" name="san" id="san" value="三" />
+		<input type="button" name="" id="si" value="四" />
+		<input type="button" name="" id="wu" value="五" />
+		<input type="button" name="san" id="liu" value="六" />
+		<input type="button" name="" id="qi" value="七" />
+		<input type="button" name="" id="ba" value="八" />
+		<input type="button" name="san" id="jiu" value="九" />
+		<input type="button" name="" id="shi" value="十" />
+		<input type="button" name="" id="shi_yi" value="十一" />
+		<input type="button" name="san" id="shi_er" value="十二" />
+		</div><!--container-->
+		
+	</body>
+	<script type="text/javascript">
+	$(function(){
+		var box = $(".book-box");
+		var prev = $("#prev");
+		var next = $("#next");
+		
+	$.get("json/book.json",function (data) {
+		next.click(function() {
+			box.html(data[1].book);
+	});
+		prev.click(function() {
+			box.html(data[0].book);
+		});	
+		
+	
+	
+	
+	
+});	
+	
+});//end
+		
+	</script>
+</html>
